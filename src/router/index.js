@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import SingleQuote from '@/views/SingleQuote.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,16 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/page/:id',
+    name: 'home.page',
+    component: HomeView
+  },
+  {
+    path: '/quotes/:author-slug',
+    name: 'quotes',
+    component: SingleQuote
   },
   {
     path: '/about',
