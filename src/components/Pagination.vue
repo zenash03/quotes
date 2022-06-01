@@ -17,8 +17,9 @@ export default {
         }
     },
     methods: {
-        checkActive: function(i) {
-            if(this.$route.params.activePagination === i){
+        checkActive: function(i = 1) {
+            const id = this.$route.params.id != undefined ? this.$route.params.id : 1
+            if(id === i){
                 return true
             }
             return false

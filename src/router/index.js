@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import SingleQuote from '@/views/SingleQuote.vue'
+import SingleQuoteView from '@/views/SingleQuote.vue'
+import TagQuotesView from '@/views/TagQuotesView.vue'
+import TagsView from '@/views/TagsView.vue'
 
 Vue.use(VueRouter)
 
@@ -12,14 +14,29 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/page/',
+    name: 'home.page.alt',
+    component: HomeView
+  },
+  {
     path: '/page/:id',
     name: 'home.page',
     component: HomeView
   },
   {
-    path: '/quotes/:author-slug',
+    path: '/quotes/:authorSlug/:id',
     name: 'quotes',
-    component: SingleQuote
+    component: SingleQuoteView
+  },
+  {
+    path : '/tags',
+    name : 'tags',
+    component : TagsView
+  },
+  {
+    path : '/tags/:tagName',
+    name: 'tagQuotes',
+    component: TagQuotesView
   },
   {
     path: '/about',

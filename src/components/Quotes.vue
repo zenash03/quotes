@@ -29,24 +29,36 @@ export default {
             indexEnd : null,
         }
     },
-    beforeMount() {
-        if(this.msg.row == 1){
-            this.indexStart = 0
-            this.indexEnd = 6
-        }
-        if(this.msg.row == 2){
-            this.indexStart = 6
-            this.indexEnd = 12
-        }
-        if(this.msg.row == 3){
-            this.indexStart = 13
-            this.indexEnd = 20
-        }
-    },
     mounted() {
+        let url , parameter
+        if(this.msg.type == 'quotes'){
+            url = 'https://api.quotable.io/quotes?page='
+            parameter = this.msg.pageNumber
+        }
+        if(this.msg.type == 'tags'){
+            url = 'https://api.quotable.io/quotes?tags='
+            parameter = this.msg.tagName
+        }
         axios
-            .get(`https://api.quotable.io/quotes?page=${this.msg.pageNumber}`)
-            .then(resp => this.items = resp)
+            .get(`${url}${parameter}`)
+            .then(resp => {
+                this.items = resp
+                const count = resp.data.count
+                const split = Math.floor(count/3)
+                if(this.msg.row == 1){
+                    this.indexStart = 0
+                    this.indexEnd = split
+                }
+                if(this.msg.row == 2){
+                    this.indexStart = split+1
+                    this.indexEnd = split*2+1
+                }
+                if(this.msg.row == 3){
+                    this.indexStart = split*2+2
+                    this.indexEnd = count
+                }
+            })
+            
     },
 }
 </script>
