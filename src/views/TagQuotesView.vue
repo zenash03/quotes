@@ -2,7 +2,7 @@
     <div class="m-5">
       <div class="flex content-center items-center gap-3 pb-5">
         <BackButton />
-        <p class="font-medium p-0">Tags : <span class=" font-normal">{{ tag }}</span></p>
+        <p class="font-medium p-0">Tags : <span class=" font-normal">{{ toCapitalize(tag) }}</span></p>
       </div>
     <div class="grid grid-cols-3 gap-5">
       <Quotes :msg="{row: 1, tagName : tag, type : 'tags'}" />
@@ -34,6 +34,15 @@ export default {
       Quotes,
       BackButton
     },
+    methods: {
+      toCapitalize(str) {
+        const newArr = str.split('-')
+        const newStr = newArr.map((value) => {
+          return value.charAt(0).toUpperCase() + value.slice(1)
+        }).join(" ")
+        return newStr
+      }
+    }
 }
 </script>
 

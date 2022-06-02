@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import SingleQuoteView from '@/views/SingleQuote.vue'
 import TagQuotesView from '@/views/TagQuotesView.vue'
 import TagsView from '@/views/TagsView.vue'
+import AuthorsView from '@/views/AuthorsView.vue'
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,11 @@ const routes = [
     path : '/tags/:tagName',
     name: 'tagQuotes',
     component: TagQuotesView
+  },
+  {
+    path : '/authors',
+    name : 'authors',
+    component : AuthorsView
   },
   {
     path: '/about',

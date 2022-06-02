@@ -1,9 +1,9 @@
 <template>
 <nav class="bg-sky-500 border-gray-200 px-2 sm:px-4 py-2.5">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-        <a href="https://flowbite.com" class="flex items-center">
+        <router-link to="/" class="flex items-center">
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Quotes App</span>
-        </a>
+        </router-link>
         <div class="flex md:order-2">
             <button type="button" data-collapse-toggle="mobile-menu-3" aria-controls="mobile-menu-3" aria-expanded="false" class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1" >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
@@ -28,13 +28,13 @@
             </div>
             <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                 <li>
-                    <router-link :to="{name : 'home'}" class="block py-2 pr-4 pl-3 text-white rounded md:bg-transparent  md:p-0 dark:text-white" aria-current="page">Home</router-link>
+                    <router-link :to="{name : 'home'}" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" aria-current="page">Home</router-link>
                 </li>
                 <li>
                     <router-link :to="{name : 'tags'}" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Tags</router-link>
                 </li>
                 <li>
-                    <router-link :to="{name : 'tags'}" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Services</router-link>
+                    <router-link :to="{name : 'authors'}" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Authors</router-link>
                 </li>
             </ul>
         </div>

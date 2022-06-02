@@ -2,9 +2,17 @@
     <div class="m-5">
         <div class="grid divide-y">
             <p class=" font-medium p-3">Tags</p>
-            <div class="py-2">
-                <Tags :msg="{items : tags}" />
-            </div>
+            <section v-if="error">
+                <p>Message : {{ errorMessage.message }}</p>
+            </section>
+            <section v-else>
+                <div v-if="loading" class="py-2">
+                    <p>Loading...</p>
+                </div>
+                <div v-else class="py-2">
+                    <Tags :msg="{items : tags}" />
+                </div>
+            </section>
         </div>
     </div>
 </template>
@@ -19,11 +27,14 @@ export default {
         return {
             items : null,
             tags : null,
+            error : false,
+            errorMessage: null,
+            loading : true
         }
     },
-    mounted() {
-        axios
-        .get('https://quotable.io/tags')
+    async created() {
+        await axios
+        .get('https://api.quotable.io/tags')
         .then(resp => {
             const data = resp.data
             const newTagsArr = data.map((value) => {
@@ -34,6 +45,10 @@ export default {
             this.tags = newTagsArr
             this.items = resp
         })
+        .catch(err => {
+            this.error = true, this.errorMessage = err
+        })
+        .finally(() => this.loading = false)
     },
     components: {
         Tags
