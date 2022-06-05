@@ -27,9 +27,6 @@ export default {
             indexEnd : null,
         }
     },
-    watch: {
-
-    },
     mounted() {
         const count = this.msg.items.data.count
         const split = Math.floor(count/3)

@@ -1,31 +1,42 @@
 <template>
     <div class="m-5">
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4 py-2 pb-3">
             <div class="col-span-2">
                 <BackButton />
             </div>
-            <div class="">
-                <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-5 mb-5">
-                    <p class="mb-3 font-medium text-gray-900 text-2xl">{{ items.content }}</p>
-                    <h5 class="mb-2 text-base font-bold tracking-tight text-sky-500">{{ items.author }}</h5>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 gap-3">
-                <div class="grid grid-cols-1 divide-y gap-3">
-                    <p class="font-medium text-gray-700">Tags</p>
-                    <div class="py-2">
-                        <Tags :msg="{'items' : items.tags}" />
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 divide-y gap-3">
-                    <p class="font-medium text-gray-700">Info</p>
-                    <div class="py-2 grid grid-cols-2">
-                        <p class="py-1 text-gray-700">Date Added : <span class="text-sky-500">{{ parseDate(items.dateAdded) }}</span></p>
-                        <p class="py-1 text-gray-700">Date Modified : <span class="text-sky-500">{{ parseDate(items.dateModified) }}</span></p>
-                    </div>
-                </div>
-            </div>
         </div>
+        <section v-if="error">
+            <p>Message : {{ errorMessage.message }}</p>
+        </section>
+        <section v-else>
+            <div v-if="loading">
+                <p>Loading...</p>
+            </div>
+            <div v-else class="grid grid-cols-2 gap-4">
+                <div class="">
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-5 mb-5">
+                        <p class="mb-3 font-medium text-gray-900 text-2xl">{{ items.content }}</p>
+                        <router-link :to="{name : 'singleAuthor'}" class="mb-2 text-base font-bold tracking-tight text-sky-500">{{ items.author }}</router-link>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-3">
+                    <div class="grid grid-cols-1 divide-y gap-3">
+                        <p class="font-medium text-gray-700">Tags</p>
+                        <div class="py-2">
+                            <Tags :msg="{'items' : items.tags}" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 divide-y gap-3">
+                        <p class="font-medium text-gray-700">Info</p>
+                        <div class="py-2 grid grid-cols-2">
+                            <p class="py-1 text-gray-700">Date Added : <span class="text-sky-500">{{ parseDate(items.dateAdded) }}</span></p>
+                            <p class="py-1 text-gray-700">Date Modified : <span class="text-sky-500">{{ parseDate(items.dateModified) }}</span></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </div>
 </template>
 
@@ -41,7 +52,11 @@ export default {
     data() {
         return {
             id: null,
-            items : null
+            items : null,
+            error : false,
+            errorMessage : null,
+            loading : true,
+            url : 'https://api.quotable.io/quotes/'
         }
     },
     methods: {
@@ -63,6 +78,10 @@ export default {
         axios
             .get(`https://api.quotable.io/quotes/${this.id}`)
             .then(resp => this.items = resp.data)
+            .catch(err => {
+                this.error = true, this.errorMessage = err
+            })
+            .finally(() => this.loading = false)
     },
     components: {
         Quote,

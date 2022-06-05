@@ -5,6 +5,7 @@ import SingleQuoteView from '@/views/SingleQuote.vue'
 import TagQuotesView from '@/views/TagQuotesView.vue'
 import TagsView from '@/views/TagsView.vue'
 import AuthorsView from '@/views/AuthorsView.vue'
+import SingleAuthorView from '@/views/SingleAuthorView.vue'
 
 Vue.use(VueRouter)
 
@@ -25,8 +26,8 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/quotes/:authorSlug/:id',
-    name: 'quotes',
+    path: '/quote/:authorSlug/:id',
+    name: 'singleQuote',
     component: SingleQuoteView
   },
   {
@@ -40,9 +41,24 @@ const routes = [
     component: TagQuotesView
   },
   {
+    path: '/tags/:tagName/:id',
+    name : 'tagQuotes.page',
+    component : TagQuotesView
+  },
+  {
     path : '/authors',
     name : 'authors',
     component : AuthorsView
+  },
+  {
+    path : '/authors/:id',
+    name : 'authors.page',
+    component : AuthorsView
+  },
+  {
+    path : '/author/:authorSlug',
+    name : 'singleAuthor',
+    component : SingleAuthorView
   },
   {
     path: '/about',
