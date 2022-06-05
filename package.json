@@ -6,7 +6,8 @@
   "author": "",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "deploy" : "sh deploy.sh"
   },
   "main": "postcss.config.js",
   "dependencies": {
